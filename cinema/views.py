@@ -108,7 +108,13 @@ class MovieViewSet(
         return MovieSerializer
 
 
-class MovieSessionViewSet(viewsets.ModelViewSet):
+class MovieSessionViewSet(
+    mixins.ListModelMixin,
+    mixins.CreateModelMixin,
+    mixins.RetrieveModelMixin,
+    mixins.UpdateModelMixin,
+    viewsets.GenericViewSet,
+):
     queryset = (
         MovieSession.objects.all()
         .select_related("movie", "cinema_hall")
